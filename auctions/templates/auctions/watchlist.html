@@ -1,0 +1,11 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if empty %}
+    <p>No active listings in watchlist</p>
+    {% else %}
+    <h1>Listings: </h1>
+    <div class="container-fluid">
+        {% include "auctions/showitems.html"%}
+    {% endif %}
+{% endblock %}

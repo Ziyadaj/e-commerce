@@ -1,0 +1,13 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if winner is None %}
+        <h1>Listing: {{item.title}}</h1>
+        <p>No winner</p>
+    {% else %}
+    <h2> WINNER WINNER!!</h2>
+
+    <h3> {{winner.user.username}} won {{item.title}} for ${{item.starting_bid}} </h3>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% block body %}
+
+<div class="container-fluid">
+
+    {% for item in items %}
+        {% if item.active is True %}
+        <div class="row g-0 bg-white border position-relative">
+            <div class="col-md-4 mb-md-0 p-md-4">
+            <img src="{{ item.image.url }}" class="w-100" alt="..." style="max-height: 350px; max-width: 350px;">
+            </div>
+            <div class="col-md-6 p-4 ps-md-0">
+              <h5 class="mt-0">{{item.title}}</h5>
+              <p>Price: ${{item.starting_bid}}</p>
+                <p>{{item.description}}</p>
+                <p class="text-secondary">Created {{item.start_time}}</p>
+              <a href="{% url 'listing' item.id  %}" class="stretched-link">See more</a>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

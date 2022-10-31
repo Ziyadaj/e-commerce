@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    {% if empty %}
+        <p>No active listings</p>
+    {% else %}
+    <div class="container-fluid">
+            {%for auction in auctions%}
+                <div class="row g-0 bg-white border position-relative">
+                    <div class="col-md-4 mb-md-0 p-md-4">
+                    <img src="{{ auction.image.url }}" class="w-100" alt="..." style="max-height: 350px; max-width: 350px;">
+                    </div>
+                    <div class="col-md-6 p-4 ps-md-0">
+                      <h5 class="mt-0">{{auction.title}}</h5>
+                      <p>Price: ${{auction.starting_bid}}</p>
+                        <p>{{auction.description}}</p>
+                        <p class="text-secondary">Created {{auction.start_time}}</p>
+                      <a href="{% url 'listing' auction.id  %}" class="stretched-link">See more</a>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}

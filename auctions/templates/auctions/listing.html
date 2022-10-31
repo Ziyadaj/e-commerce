@@ -1,0 +1,61 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+    {% if item.active is False %}
+        {% if request.user == HighestBid %}
+            <h1>Listing: {{item.title}}</h1>
+            <h2>YOU HAVE WON THIS LISTING!!</h2>
+            <h3> {{request.user.username}} won {{item.title}} for ${{item.starting_bid}} </h3>            
+        {% endif %}
+    {% endif %}
+    <h1>Listing: {{item.title}}</h1>
+    <a class="btn btn-dark" href="{% url 'add_watchlist' item.id %}" role="button">Watchlist</a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-md-4">
+                <img src="{{ item.image.url }}" class="img-thumbnail" alt="no image">
+            </div>
+            <div class="col-6 p-3">
+                <div class="row">
+                    <p>{{item.description}}</p>
+                </div>
+                <div class="row">
+                    <h2>${{item.starting_bid}}</h2>
+                </div>
+                <div class="row">
+                    <p class="text-secondary">Number of Bids: {{num_bids}}</p>
+                </div>   
+                    <form action="" method="post">  
+                        {% csrf_token %}
+                        <div class="row"> 
+                            <input type="number" name="bid_price" step=".01" class="form-control" placeholder="bid">    
+                        </div>
+                        <div class="row p-1">
+                            <button class="btn btn-primary" type="submit">Bid</button>  
+                        </div>   
+                    </form>   
+                <div class="row">
+                    <h2>Details</h2>
+                </div>
+                <ul>
+                    <li>Seller: {{seller}}</li>
+                    <li>Created: {{item.start_time}}</li>
+                    <li>Category: {{category}}</li>
+                </ul>
+                <div class="row">
+                    {% if request.user == seller %}
+                        <a class="btn btn-primary" href="{% url 'winner' item.id %}">Close Bid</a>
+                    {% endif %}
+                </div>   
+            </div>
+    </div>
+
+{% endblock %}

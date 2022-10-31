@@ -1,0 +1,12 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    
+    {% if empty %}
+        <p>No active listings</p>
+    {% else %}
+      {% include "auctions/showitems.html"%}
+    {% endif %}
+{% endblock %}

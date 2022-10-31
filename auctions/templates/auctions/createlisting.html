@@ -1,0 +1,74 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+    <div class="container p-4">
+        <h2>Create listing</h2>
+        <p class="text-secondary">Fill out the form below to create a new listing</p>
+    </div>
+    <form class="needs-validation" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row p-3">
+                <div class="col-4">
+                <label for="title">Product Name</label>
+                </div>
+                <div class="col-3">
+                <input type="text"  name="title" placeholder="Product name" id="title" class="form-control">
+                </div>
+
+            </div>
+            <div class="row p-3">
+                <div class="col-md-4">
+                    <label for="description">Product Description</label>
+                </div>
+                <div class="col-md-3">
+                    <textarea name="description" placeholder="Describe your product" id="description" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-4">
+                <label for="price">Price</label>
+                </div>
+                <div class="col-3">
+                <input type="number" name="starting_bid" id="starting_bid" class="form-control" step=".01" placeholder="100.00$">
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-4">
+                    <label for="category">Category</label>
+                </div>
+                <div class="col-3">
+                    <select name="category" id="category" class="form-control">
+                        <option selected>Choose a category</option>
+                        <option value="1">Furniture</option>
+                        <option value="2">Clothes</option>
+                        <option value="3">Electronics</option>
+                        <option value="4">Books</option>
+                        <option value="5">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-4">
+                    <label for="image">Image</label>
+                </div>
+                <div class="col-3">
+                        {{form.image}}
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col" style="text-align: center;">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+            </div>
+        </div>    
+    </form>
+{% endblock %}
